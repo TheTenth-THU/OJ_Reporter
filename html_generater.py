@@ -24,17 +24,43 @@ def generate_html(submit_info: dict, code_info: dict):
 <head>
     <title>OJ Annual Report</title>
     <style>
+        body {
+            width: 80%;
+            margin: 0 auto;
+        }
+
         table {
-            width: 100%;
             border-collapse: collapse;
+            width: 100%;
+            margin: 0 auto
         }
-        th, td {
-            border: 1px solid black;
+
+        table thead tr {
+            line-height: 40px;
+            padding: 8px
+        }
+
+        table tbody tr {
+            line-height: 25px
+        }
+
+        table tbody tr td {
             padding: 8px;
-            text-align: center;
+            text-align: center
         }
-        th {
-            background-color: #f2f2f2;
+
+        table tbody tr td a {
+            color: #5cb85c;
+            display: block
+        }
+
+        table tbody tr:nth-child(odd) {
+            background-color: #f5f5f5
+        }
+
+        table tbody tr:hover {
+            cursor: pointer;
+            background: rgba(162, 226, 214, .08)
         }
     </style>
 </head>
@@ -127,24 +153,24 @@ def generate_html(submit_info: dict, code_info: dict):
 
         # date and time information --------------------------------------
         date_info = f"""
-<h2>日期与时间信息</h2>
-<p>你提交的代码集中在以下日期：</p>
-<table>
-    <tr>
+    <h2>日期与时间信息</h2>
+    <p>你提交的代码集中在以下日期：</p>
+    <table>
+        <tr>
         <th>日期</th>
         <th>提交次数</th>
-    </tr>
+        </tr>
         """
         f.write(date_info)
 
         # date table
         count = 10
-        for date, number in sorted(submit_info['create_dates'].items()):
+        for date, number in sorted(submit_info['create_dates'].items(), key=lambda x: x[1], reverse=True):
             date_table = f"""
-    <tr>
+        <tr>
         <td>{date}</td>
         <td>{number}</td>
-    </tr>
+        </tr>
             """
             f.write(date_table)
             count -= 1
@@ -153,30 +179,29 @@ def generate_html(submit_info: dict, code_info: dict):
         
         # time table
         time_info = f"""
-</table>
-<p>你提交的代码集中在以下时间：</p>
-<table>
-    <tr>
+    </table>
+    <p>你提交的代码集中在以下时间：</p>
+    <table>
+        <tr>
         <th>时间</th>
         <th>提交次数</th>
-    </tr>
+        </tr>
         """
         f.write(time_info)
 
         # time table
         count = 10
-        for time, number in sorted(submit_info['create_times'].items()):
+        for time, number in sorted(submit_info['create_times'].items(), key=lambda x: x[1], reverse=True):
             time_table = f"""
-    <tr>
+        <tr>
         <td>{time}</td>
         <td>{number}</td>
-    </tr>
+        </tr>
             """
             f.write(time_table)
             count -= 1
             if count == 0:
                 break
-
         # code information -----------------------------------------------
         all_code_info = f"""
 </table>

@@ -1,0 +1,11 @@
+beautifulsoup4
+Brotli
+certifi
+charset-normalizer
+idna
+lxml==5.3.0
+PySocks
+requests
+soupsieve
+urllib3
+win-inet-pton

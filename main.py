@@ -47,7 +47,7 @@ def main():
         dates_after_deadline = []
         for datestring in submit_info['submit_problems'][problem]['dates']:
             date = datetime.strptime(datestring, '%Y-%m-%d')
-            pass_deadline = date - deadline if date > deadline else 0
+            pass_deadline = (date - deadline).days if date > deadline else 0
             for i in range(submit_info['submit_problems'][problem]['dates'][datestring]):
                 dates_after_deadline.append(pass_deadline)
         dates_after_deadline.sort()
